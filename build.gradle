@@ -1,0 +1,32 @@
+group 'com.github.gajo4256'
+version '1.0-SNAPSHOT'
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '2.11'
+  distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+}
+
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+    //jcenter()
+}
+
+ext {
+    gebVersion = "0.13.1"
+}
+
+dependencies {
+    //compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    testCompile("org.spockframework:spock-core:1.0-groovy-2.4") {
+        exclude group: "org.codehaus.groovy"
+    }
+    testCompile "org.gebish:geb-spock:$gebVersion"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile 'org.slf4j:slf4j-api:1.7.13'
+    testCompile 'org.slf4j:slf4j-simple:1.7.13'
+    testRuntime(
+            'com.athaydes:spock-reports:1.2.9'
+    )
+}
